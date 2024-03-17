@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    command: -c 'max_connections=1000'
+    ports:
+      - ${PGPORT}:${PGPORT}
+    env_file:
+      - .env
+    networks:
+      - postgres-network
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+
+networks: 
+  postgres-network:
+    driver: bridge
